@@ -1,8 +1,145 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
+body {
+  padding: 2vmin;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: 
+    "nav"
+    "main"
+}
+
+body > nav {
+  grid-area: nav;
+  background-color: #B8C0C2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 0.2vmin 0 0.5vmin;
+  color: #4a4e4d;
+}
+
+.menu > .top-menu {
+  color: black;
+}
+
+.top-menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vmin 10vmin;
+  text-decoration: none;
+  height: 5vmin;
+  padding: 1vmin;
+  border-radius: 0.5vmin;
+}
+
+.google-avatar {
+  height: 3vmin;
+  margin-right: 0.5vmin;
+}
+
+.top-menu:hover {
+  background-color: antiquewhite;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  margin-top: 15vh;
+  background-color: #f1f1f1;
+  min-width: 11vmin;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.top-menu:hover .sub-menu {
+  display: block;
+}
+
+.sub-menu-content {
+  color: black;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.sub-menu-content:hover {
+  background-color: #ddd;
+}
+
+body > main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #E8ECEB;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+}
+
+.login img {
+  height: 30px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar input {
+  padding: 1vmin;
+  font-size: 2vmin;
+  border: none;
+  border-right: 0.2vmin solid gray;
+  width: 45vmin;
+  margin-right: 1vmin;
+}
+
+.search-bar input:last-child {
+  border-right: none;
+  border-radius: 0 10vmin 10vmin 0;
+}
+
+.search-bar button[type="submit"] {
+  padding: 1vmin 2vmin;
+  background-color: #f2f2f2;
+  border-radius: 30%;
+  border: none;
+  font-size: 2vmin;
+  background-color: antiquewhite;
+  cursor: pointer;
+}
+
+.restaurant {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.restaurant-image {
+  width: 150px;
+  height: 150px;
+  margin-right: 20px;
+}
+
+.restaurant-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

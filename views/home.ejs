@@ -1,0 +1,10 @@
+<%- include('./partials/header') %>
+<main>
+    <form class="search-bar" action="/restaurants" method="GET">
+        <input type="text" placeholder="Restaurants, categories" name="term">
+        <input type="text" placeholder="Location (required)" required name="location">
+        <button type="submit">Search</button>
+    </form>
+</main>
+
+<%- include('./partials/footer') %>

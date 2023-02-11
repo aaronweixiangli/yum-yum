@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+
+<h1>Restaurant List</h1>
+<ol>
+  <% restaurantsData.businesses.forEach(function(r) { %>
+    <li class="restaurant">
+        <img class="restaurant-image" src="<%= r.image_url %>" alt="<%= r.name %>">
+        <div class="restaurant-info">
+            <h2><%= r.name %></h2>
+            <p>Yelp rating: <%= r.rating %></p>
+        </div>
+    </li>
+  <% }); %>
+</ol>
+
+<%- include('../partials/footer') %>
