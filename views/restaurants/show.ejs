@@ -80,57 +80,97 @@
                         </div>
                         <div class="restaurant-today-hours">
                             <% if (restaurant.hours[0].is_open_now) { %>
-                                  <%= formatTime(restaurant.hours[0].open[new Date().getDay()].start) %> to 
-                                  <%= formatTime(restaurant.hours[0].open[new Date().getDay()].end) %>
-                              <% } %>
+                                <% for (let i = 0; i < restaurant.hours[0].open.length; i++) { %>
+                                    <% if (restaurant.hours[0].open[i].day === new Date().getDay()) { %>
+                                        <%= formatTime(restaurant.hours[0].open[i].start) %> to 
+                                        <%= formatTime(restaurant.hours[0].open[i].end) %>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
                         </div>
-                        <% 
-                            function formatTime(time) {
-                                let formattedTime = '';
-                                let hours = parseInt(time.slice(0, 2));
-                                let minutes = time.slice(2, 4);
-                                let period = 'AM';
-                                if (hours >= 12) {
-                                period = 'PM';
-                                hours -= 12;
-                                }
-                                if (hours === 0) {
-                                hours = 12;
-                                }
-                                formattedTime = hours + ':' + minutes + ' ' + period;
-                                return formattedTime;
-                            }
-                        %>
                     </div>
                 </div>
             </div>
             <section class="restaurant-main">
                 <div class="restaurant-hours">
-                    <p>Opening hours:</p>
-                    <ul>
-                      <% let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %>
-                      <% for (let i = 0; i < 7; i++) { %>
-                        <li><%= days[i] %>: 
-                          <%= formatTime(restaurant.hours[0].open[i].start) %> to 
-                          <%= formatTime(restaurant.hours[0].open[i].end) %>
-                        </li>
-                      <% } %>
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                              <th>Day</th>
+                              <th>Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %>
+                            <% let openDays = [] %>
+                            <% let dayIndexMap = {} %>
+                            <% restaurant.hours[0].open.forEach(function(open) { %>
+                                <% if (openDays.includes(open.day)) { %>
+                                    <% dayIndexMap[open.day].push(open) %>
+                                <% } else { %>
+                                    <% openDays.push(open.day) %>
+                                    <% dayIndexMap[open.day] = [open] %>
+                                <% } %>
+                            <% }) %>
+                            <% for (let i = 0; i < days.length; i++) { %>
+                                <tr>
+                                    <td><%= days[i] %>: </td>
+                                    <% if (openDays.includes(i)) { %>
+                                        <% let dayOpen = dayIndexMap[i] %>
+                                    <td>
+                                        <% for (let j = 0; j < dayOpen.length; j++) { %>
+                                        <%= formatTime(dayOpen[j].start) %> to 
+                                        <%= formatTime(dayOpen[j].end) %>
+                                        <% if (j < dayOpen.length - 1) { %>
+                                            <br>
+                                        <% } %>
+                                        <% } %>
+                                    <% } else { %>
+                                        <td>Closed</td>
+                                    <% } %>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="restaurant-location">
-                    <p>Location: </p><br>
-                    <% for (let i = 0; i < restaurant.location.display_address.length; i++) { %>
-                        <%= restaurant.location.display_address[i] %><br>
-                    <% } %>
+                    <table>
+                        <tbody>
+                            <tr><th>Location: </th></tr>
+                            <tr>
+                                <td>
+                                    <% for (let i = 0; i < restaurant.location.display_address.length; i++) { %>
+                                        <%= restaurant.location.display_address[i] %><br>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table>
+                        <tbody>
+                            <tr><th>Phone Number:</th></tr>
+                            <tr><td><%= restaurant.display_phone %></td></tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div>
                     <p>Google Map</p>
-                    
                 </div>
             </section>
-            <section>
-
-            </section>
+        <div>
+            <h1>Reviews</h1>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+            <p>yelp</p>
+        </div>
 
         <% } else { %>
             <h1>Sorry, the restaurant could not be found</h1>
