@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 
 <h1>Restaurant List</h1>
-<ol>
-  <% restaurantsData.businesses.forEach(function(r) { %>
+<ol class="restaurant-list">
+  <% pageRestaurants.forEach(function(r) { %>
     <li class="restaurants">
         <img class="restaurants-image" src="<%= r.image_url %>" alt="<%= r.name %>">
         <div class="restaurants-info">
@@ -12,5 +12,22 @@
     </li>
   <% }); %>
 </ol>
+<ul class="pages">
+  <% if (hasPrevPage) { %>
+    <li>
+      <a href="/restaurants/?term=<% term %>&location=<%= location %>&page=<%= currentPage-1 %>"><<</a>
+    </li>
+  <% } %>
+  <% for (let i = 1; i <= numOfPages; i++) { %>
+    <li>
+      <a href="/restaurants/?term=<% term %>&location=<%= location %>&page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+    </li>
+  <% } %>
+  <% if (hasNextPage) { %>
+    <li>
+      <a href="?term=<% term %>&location=<%= location %>&page=<%= currentPage+1 %>">>></a>
+    </li>
+  <% } %>
+</ul>
 
 <%- include('../partials/footer') %>

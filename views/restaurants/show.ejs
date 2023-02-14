@@ -7,17 +7,28 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <title><%= title %></title>
     <style>
+        body {
+            height: auto;
+        }
          .restaurant-header {
             background-image: url("<%= restaurant.image_url %>");
             background-size: cover;
             background-position: center;
             height: 40vmin;
          }
+         body > main {
+            background-image: none;
+         }
     </style>
 </head>
 <body>
     <nav class="menu">
-      <a href="/" class="top-menu">HOME</a>
+        <a href="/" class="top-menu"><img src="https://i.imgur.com/Yzv8KHw.png" alt="logo" class="logo"></a>
+        <form class="search-bar" action="/restaurants" method="GET">
+            <input type="text" placeholder="Restaurants, categories" name="term">
+            <input type="text" placeholder="Location (required)" required name="location">
+            <button type="submit">Search</button>
+        </form>
         <% if (user) { %>
             <div class="top-menu"><img src="<%= user.avatar %>" alt="avatar" class="google-avatar"><%= user.name %>
               <nav class="sub-menu">
@@ -113,8 +124,12 @@
                     <% } %>
                 </div>
                 <div>
-                    Google Map
+                    <p>Google Map</p>
+                    
                 </div>
+            </section>
+            <section>
+
             </section>
 
         <% } else { %>

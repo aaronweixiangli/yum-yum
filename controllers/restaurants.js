@@ -41,10 +41,21 @@ async function index(req, res, next) {
         }
       };
     try {
-        const restaurantsData = await fetch(`${ROOT_URL}/search?location=${location}&term=${term}&limit=50`, options)
+        const restaurantsData = await fetch(`${ROOT_URL}/search?location=${location}&term=${term}&sort_by=best_match&limit=50`, options)
             .then(res => res.json())
         const error = null;
-        res.render('restaurants/index', {title: 'Restaurants', restaurantsData, error})
+        const restaurantsPerPage = 10;
+        let currentPage  = parseInt(req.query.page) || 1;
+        let startIndex = (currentPage  - 1) * restaurantsPerPage;
+        let endIndex = startIndex + restaurantsPerPage - 1;
+        let numOfPages = Math.ceil(restaurantsData.businesses.length / restaurantsPerPage);
+        let pageRestaurants = restaurantsData.businesses.slice(startIndex, endIndex + 1);
+        console.log(pageRestaurants)
+        // Check if there is a next page
+        const hasNextPage = currentPage * restaurantsPerPage < restaurantsData.businesses.length;
+        // Check if there is a previous page
+        const hasPrevPage = currentPage > 1;
+        res.render('restaurants/index', {title: 'Restaurants', error, pageRestaurants, numOfPages, hasNextPage, hasPrevPage, currentPage, term, location})
     } catch (error) {
         const restaurantsData = null;
         res.render('restaurants/index', {title: 'Restaurants', restaurantsData, error})

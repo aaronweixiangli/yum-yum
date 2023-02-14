@@ -2,14 +2,23 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 body {
-  padding: 2vmin;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template-rows: 50px 1fr;
+  background-color: ivory;
+  grid-template-rows: 80px 1fr;
   grid-template-areas: 
     "nav"
     "main"
@@ -17,12 +26,17 @@ body {
 
 body > nav {
   grid-area: nav;
-  background-color: #B8C0C2;
+  background-color: lemonchiffon;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 0.2vmin 0 0.5vmin;
+  padding: 0 0.2vmin 0 0.2vmin;
   color: #4a4e4d;
+  position: fixed;
+  width: 100vw;
+  margin: 0;
+  top: 0;
+  height: 10vmin;
 }
 
 .menu > .top-menu {
@@ -40,12 +54,15 @@ body > nav {
   padding: 1vmin;
   border-radius: 0.5vmin;
 }
-
 .google-avatar {
-  height: 3vmin;
+  height: 5vmin;
   margin-right: 0.5vmin;
 }
-
+.logo {
+  height: 8vmin;
+  margin-right: 0.5vmin;
+  padding-bottom: 1vmin;
+}
 .top-menu:hover {
   background-color: antiquewhite;
 }
@@ -80,9 +97,11 @@ body > main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #E8ECEB;
+  background-color: ivory;
   padding: 20px;
   overflow-y: scroll;
+  background-image: url("https://i.imgur.com/4WUoWXq.jpg");
+  background-size: cover;
 }
 
 .login {
@@ -100,6 +119,7 @@ body > main {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0.5vmin 0.5vmin 0.5vmin 0.5vmin rgba(0,0,0,0.2);
 }
 
 .search-bar input {
@@ -144,9 +164,44 @@ body > main {
   justify-content: center;
 }
 
+.restaurant-list li{
+  padding-top: 2vmin;
+  padding-left: 1vmin;
+  border-bottom: #ccc solid 0.1vmin;
+  padding-bottom: 1.5vmin;
+}
+.restaurant-list li:hover {
+  box-shadow: 2px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.pages {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+  justify-content: flex-end;
+  margin-right: 5vmin ;
+}
+.pages li {
+  margin: 1vmin 1vmin 5vmin;
+  font-size: 2.5vmin;
+}
+
+.pages .active {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+
 .restaurant-content {
   display: grid;
-  grid-template-rows: 2fr 3fr;
+  grid-template-rows: 2fr 1.5fr 3fr;
 }
 
 .header-content {
@@ -205,6 +260,8 @@ body > main {
 .restaurant-main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  height: 100%;
+  margin-top: 3vmin;
 }
 
 .restaurant-main div {
@@ -213,4 +270,5 @@ body > main {
   align-items: center;
   flex-direction: column;
   font-size: 2vmin;
+  line-height: 3vmin;
 }
