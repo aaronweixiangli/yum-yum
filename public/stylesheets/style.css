@@ -15,7 +15,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   display: grid;
   background-color: ivory;
   grid-template-rows: 80px 1fr;
@@ -98,8 +98,8 @@ body > main {
   flex-direction: column;
   align-items: center;
   background-color: ivory;
-  padding: 20px;
-  overflow-y: scroll;
+  /* padding: 20px; */
+  /* overflow-y: scroll; */
   background-image: url("https://i.imgur.com/4WUoWXq.jpg");
   background-size: cover;
 }
@@ -222,7 +222,10 @@ body > main {
   font-weight: bold;
 }
 .restaurant-rating img {
-  height: 3vmin;
+  height: 2vmin;
+}
+#yelp-rating-info, #yumyum-rating-info {
+  margin: 1vmin 0 0.5vmin 0;
 }
 .restaurant-review-count {
   font-size: 1.25vmin;
@@ -340,4 +343,33 @@ table td, table th {
 #rating-select > select {
   width: 8vmin;
   margin-left: 1vmin;
+}
+
+.review-avatar {
+  height: 3vmin;
+  width: 3vmin;
+  margin-right: 0.5vmin;
+}
+
+#yelp-reviews-div, #yumyum-reviews-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3vmin;
+  font-size: 2vmin;
+}
+
+#yelp-reviews-table, #yumyum-reviews-table {
+  width: 80vw;
+}
+#yelp-reviews-table tr, #yumyum-reviews-table tr {
+  height: 3vmin;
+}
+#yelp-reviews-table td {
+  white-space: normal;
+  word-wrap: break-word;
+}
+.review-user {
+  display: flex;
+  align-items: center;
 }

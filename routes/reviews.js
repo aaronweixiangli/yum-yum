@@ -8,4 +8,7 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 // GET /restaurants/:id/reviews/new
 router.get('/restaurants/:id/reviews/new', ensureLoggedIn, reviewsCtrl.new);
 
+// POST /restaurants/:id/reviews
+router.post('/restaurants/:id/reviews', ensureLoggedIn, reviewsCtrl.create);
+
 module.exports = router;

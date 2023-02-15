@@ -35,8 +35,9 @@ async function show(req, res, next) {
     try {
         const restaurant = await fetch(`${ROOT_URL}/${id}`, options)
             .then(res => res.json());
-        const yelpReviews = await fetch(`${ROOT_URL}/${id}/reviews?limit=20&sort_by=yelp_sort`, options)
+        let yelpReviews = await fetch(`${ROOT_URL}/${id}/reviews?limit=20&sort_by=yelp_sort`, options)
             .then(res => res.json());
+        yelpReviews = yelpReviews.reviews;
         const error = null;
         // create a mongoDB for restaurant if it does not exist yet
         let restaurantMongo = await Restaurant.findOne({id: id});
@@ -46,9 +47,9 @@ async function show(req, res, next) {
                 name: restaurant.name,
                 city: restaurant.location.city
             };
-            Restaurant.create(newRestaurant);
-        }
-        res.render('restaurants/show', {title: 'Restaurant', restaurant, error, yelpReviews, formatTime});
+            restaurantMongo = await Restaurant.create(newRestaurant);
+        };
+        res.render('restaurants/show', {title: 'Restaurant', restaurant, error, yelpReviews, restaurantMongo, formatTime});
     } catch (error) {
         const restaurant = null;
         res.render('restaurants/show', {title: 'Restaurant', restaurant, error});
@@ -76,7 +77,6 @@ async function index(req, res, next) {
         let endIndex = startIndex + restaurantsPerPage - 1;
         let numOfPages = Math.ceil(restaurantsData.businesses.length / restaurantsPerPage);
         let pageRestaurants = restaurantsData.businesses.slice(startIndex, endIndex + 1);
-        console.log(pageRestaurants)
         // Check if there is a next page
         const hasNextPage = currentPage * restaurantsPerPage < restaurantsData.businesses.length;
         // Check if there is a previous page

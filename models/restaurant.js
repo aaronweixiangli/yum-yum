@@ -21,7 +21,7 @@ const reviewSchema = new Schema({
     userAvatar: String
   }, {
     timestamps: true
-  });
+});
 
 const restaurantSchema = new Schema({
     id: String,

@@ -1,8 +1,10 @@
 <%- include('../partials/header') %>
 
 <main id="review-main">
+    <% if (restaurant) { %>
     <form id="add-review-form" method="POST"
-        action="/restaurants/<%= id %>/reviews">
+        action="/restaurants/<%= restaurant.id %>/reviews">
+        <h1><%= restaurant.name %></h1>
         <div>
             <div id="rating-select">
                 <label>Rating:</label>
@@ -20,6 +22,10 @@
         </div>
         <input type="submit" value="Post Review" id="submit-review">
     </form>
+    <% } else { %>
+        <h1>Sorry, the post review page could not be found</h1>
+        <p><%= error %></p>
+    <% } %>
 </main>
 
 
