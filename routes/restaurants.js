@@ -11,6 +11,7 @@ const ROOT_URL = 'https://api.yelp.com/v3';
 // GET /restaurants
 router.get('/', restaurantsCtrl.index);
 
+
 // GET /restaurants/:id
 router.get('/:id', restaurantsCtrl.show);
 

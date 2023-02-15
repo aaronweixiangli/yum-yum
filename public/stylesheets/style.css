@@ -193,15 +193,9 @@ body > main {
 }
 
 
-
-
-
-
-
-
 .restaurant-content {
   display: grid;
-  grid-template-rows: 40vmin 45vmin 1fr;
+  grid-template-rows: 40vmin 5vmin 45vmin 1fr;
 }
 
 .header-content {
@@ -255,6 +249,25 @@ body > main {
 .restaurant-today-hours {
   margin-left: 2vmin;
 }
+#add-forms {
+  height: 5vmin;
+  display: flex;
+  align-items: center;
+}
+#new-review {
+  background-color: red;
+  color: white;
+  margin-left: 5.5vmin;
+  border-radius: 10%;
+  height: 4vmin;
+  padding: 1vmin 0.8vmin 0 0.8vmin;
+}
+#new-review:hover {
+  background-color: brown;
+  color: white;
+  text-decoration: none;
+}
+
 
 .restaurant-main {
   display: grid;
@@ -265,7 +278,7 @@ body > main {
 
 .restaurant-main div {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   font-size: 2vmin;
@@ -283,4 +296,48 @@ table td, table th {
   text-align: center;
   /* vertical-align: middle; */
   /* height: 50px; */
+}
+
+#add-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2vmin;
+  justify-content: center;
+  align-items: center;
+}
+
+#add-review-form div div {
+  display: flex;
+}
+#review-content  {
+  height: 30vmin;
+  width: 60vmin;
+  background-color: rgba(255, 255, 255, 0.4);
+  font-size: large;
+}
+#submit-review {
+  width: 50%;
+  height: 3vmin;
+  background-color: antiquewhite;
+}
+#submit-review:hover {
+  background-color:peachpuff;
+  /* color: white; */
+}
+#review-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#add-review-form > div {
+  border: 0.1vmin solid lightgray;
+  padding: 1vmin;
+}
+#rating-select > label {
+  color: brown;
+  font-size: 2vmin;
+}
+#rating-select > select {
+  width: 8vmin;
+  margin-left: 1vmin;
 }
