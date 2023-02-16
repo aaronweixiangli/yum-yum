@@ -11,4 +11,7 @@ router.get('/restaurants/:id/reviews/new', ensureLoggedIn, reviewsCtrl.new);
 // POST /restaurants/:id/reviews
 router.post('/restaurants/:id/reviews', ensureLoggedIn, reviewsCtrl.create);
 
+// DELETE /restaurants/:restaurantId/reviews/:reviewId
+router.delete('/restaurants/:restaurantId/reviews/:reviewId', ensureLoggedIn, reviewsCtrl.delete);
+
 module.exports = router;

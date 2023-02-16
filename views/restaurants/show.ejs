@@ -60,12 +60,13 @@
                             (<%= restaurant.review_count %> Yelp reviews)
                         </div>
                     </div>
+                    <% let total = 0; %>
+                    <% restaurantMongo.reviews.forEach(function(r) { %>
+                        <% total += r.rating %>
+                        <% }); %>
+                    <% let yumyumRating = (total / restaurantMongo.reviews.length).toFixed(1) %>
+                    <% if (total !== 0) { %>
                     <div class="restaurant-info" id="yumyum-rating-info">
-                        <% let total = 0; %>
-                        <% restaurantMongo.reviews.forEach(function(r) { %>
-                            <% total += r.rating %>
-                            <% }); %>
-                        <% let yumyumRating = (total / restaurantMongo.reviews.length).toFixed(1) %>
                         <div class="restaurant-rating">
                             <% for (let i = 0; i < Math.floor(yumyumRating); i++) { %>
                             <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
@@ -78,6 +79,11 @@
                             (<%= restaurantMongo.reviews.length %> Yum Yum reviews)
                         </div>
                     </div>
+                    <% } else { %>
+                        <div class="restaurant-info" id="yumyum-rating-info" style="color:lightgray">
+                            No Yum Yum reviews yet
+                        </div>
+                    <% } %>
                     <div class="restaurant-info">
                         <div class="restaurant-price">
                             <%= restaurant.price %>
@@ -196,10 +202,11 @@
                   <tbody>
                     <% yelpReviews.forEach(function(r) { %>
                       <tr>
-                        <td class="review-user"><img src="<%= r.user.image_url %>" alt="avatar" referrerpolicy="no-referrer" class="review-avatar"> <%= r.user.name %> </td>
+                        <td class="review-user"><div><img src="<%= r.user.image_url %>" alt="avatar" referrerpolicy="no-referrer" class="review-avatar"> <%= r.user.name %></div> </td>
                         <td><%= r.time_created %></td>
                         <td><%= r.text %></td>
                         <td><%= r.rating %></td>
+                        <td></td>
                       </tr>
                     <% }); %>
                   </tbody>
@@ -211,7 +218,6 @@
 
         <div id="yumyum-reviews-div">
             <h1>Yum Yum Reviews</h1>
-            <%= (total / restaurantMongo.reviews.length).toFixed(1) %>
             <% if (restaurantMongo.reviews.length) { %>
                 <table id="yumyum-reviews-table">
                   <thead>
@@ -228,31 +234,23 @@
                     <% restaurantMongo.reviews.forEach(function(r) { %>
                       <% total += r.rating %>
                       <tr>
-                        <td class="review-user"><img src="<%= r.userAvatar %>" alt="avatar" referrerpolicy="no-referrer" class="review-avatar"> <%= r.userName %> </td>
+                        <td class="review-user"><div><img src="<%= r.userAvatar %>" alt="avatar" referrerpolicy="no-referrer" class="review-avatar"> <%= r.userName %></div> </td>
                         <td><%= r.createdAt.toLocaleDateString() %></td>
                         <td><%= r.content %></td>
                         <td><%= r.rating %></td>
                         <td>
                           <% if (user?._id.equals(r.user)) { %>
-                            <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST">
-                              <button type="submit">X</button>
+                            <form action="/restaurants/<%= restaurant.id %>/reviews/<%= r._id %>?_method=DELETE" method="POST">
+                              <button type="submit" id="delete-review">X</button>
                             </form>
                           <% } %>
                         </td>
                       </tr>
                     <% }); %>
-                    <tr>
-                      <td colspan="2"></td>
-                      <td>
-                        <strong>
-                          <%= (total / restaurantMongo.reviews.length).toFixed(1) %>
-                        </strong>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               <% } else { %>
-                <h5>No Reviews Yet</h5>
+                <h3>No Reviews Yet</h3>
               <% } %>
         </div>
 

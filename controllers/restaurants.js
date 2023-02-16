@@ -40,7 +40,7 @@ async function show(req, res, next) {
         yelpReviews = yelpReviews.reviews;
         const error = null;
         // create a mongoDB for restaurant if it does not exist yet
-        let restaurantMongo = await Restaurant.findOne({id: id});
+        let restaurantMongo = await Restaurant.findOne({id: id}).populate('reviews');
         if (!restaurantMongo) {
             const newRestaurant = {
                 id: restaurant.id,

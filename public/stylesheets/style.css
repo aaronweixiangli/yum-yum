@@ -365,11 +365,35 @@ table td, table th {
 #yelp-reviews-table tr, #yumyum-reviews-table tr {
   height: 3vmin;
 }
-#yelp-reviews-table td {
+#yelp-reviews-table td, #yumyum-reviews-table td {
   white-space: normal;
   word-wrap: break-word;
+  padding-top: 1vmin;
+  padding-bottom: 1vmin;
 }
-.review-user {
+.review-user > div {
   display: flex;
   align-items: center;
+}
+#yelp-reviews-table td:nth-child(1), #yumyum-reviews-table td:nth-child(1) {
+  width: 10%;
+}
+#yelp-reviews-table td:nth-child(2), #yumyum-reviews-table td:nth-child(2) {
+  width: 10%;
+}
+#yelp-reviews-table td:nth-child(3), #yumyum-reviews-table td:nth-child(3) {
+  width: 60%;
+  text-align: left;
+}
+#yelp-reviews-table td:nth-child(4), #yumyum-reviews-table td:nth-child(4) {
+  width: 10%;
+}
+#yelp-reviews-table td:nth-child(5), #yumyum-reviews-table td:nth-child(5) {
+  width: 10%;
+}
+#delete-review {
+  background-color:bisque;
+}
+#delete-review:hover {
+  background-color: burlywood;
 }
