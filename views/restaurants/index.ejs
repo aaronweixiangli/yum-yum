@@ -1,7 +1,105 @@
 <%- include('../partials/header') %>
-
-<h1>Restaurant List</h1>
-<ol class="restaurant-list">
+<main id="restaurants-page">
+<section id="filter-section">
+  <form id="filter-form">
+    <div id="filter-first-row">
+      <div>
+        <label>Price:</label>
+        <select name="price">
+          <option value="">All</option>
+          <option value="1">$</option>
+          <option value="2">$$</option>
+          <option value="3">$$$</option>
+          <option value="4">$$$$</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Categories:</label>
+        <input type="text" name="categories">
+      </div>
+      <div>
+        <label>Open Now:</label>
+        <input type="checkbox" name="open_now" value="true">
+      </div>
+      <div class="filter-group">
+        <label>Sort By:</label>
+        <select name="sort_by">
+          <option value="best_match" selected>Best Match</option>
+          <option value="rating">Rating</option>
+          <option value="review_count">Review Count</option>
+        </select>
+      </div>
+    </div>
+    <div class="attributes-list">
+        <label>
+          <input type="checkbox" name="attributes" value="hot_and_new"> Hot and New
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="request_a_quote"> Request a Quote
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="reservation"> Reservation
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="waitlist_reservation"> Waitlist Reservation
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="deals"> Deals
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="gender_neutral_restrooms"> Gender Neutral Restrooms
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="open_to_all"> Open to All
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="wheelchair_accessible"> Wheelchair Accessible
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="liked_by_vegetarians"> Liked by Vegetarians
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="outdoor_seating"> Outdoor Seating
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_garage"> Parking Garage
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_lot"> Parking Lot
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_street"> Parking Street
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_valet"> Parking Valet
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_validated"> Parking Validated
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_bike"> Parking Bike
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="restaurants_delivery"> Restaurants Delivery
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="restaurants_takeout"> Restaurants Takeout
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="wifi_free"> Free Wi-Fi
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="wifi_paid"> Paid Wi-Fi
+        </label>
+    </div>
+    <div id="filter-submit">
+      <button type="submit">Apply Filters</button>
+    </div>
+  </form>
+</section>
+<section id="restaurants-results">
+  <ol class="restaurant-list">
+  <h1>Results</h1>
   <% pageRestaurants.forEach(function(r) { %>
     <li class="restaurants">
         <img class="restaurants-image" src="<%= r.image_url %>" alt="<%= r.name %>">
@@ -48,5 +146,6 @@
     </li>
   <% } %>
 </ul>
-
+</section>
+</main>
 <%- include('../partials/footer') %>
