@@ -8,8 +8,69 @@ const ROOT_URL = 'https://api.yelp.com/v3/businesses';
 module.exports = {
     new: newReview,
     create,
-    delete: deleteReview
+    delete: deleteReview,
+    edit,
+    update,
+    allReviews
 };
+
+async function allReviews(req, res, next) {
+    const id = req.params.id;
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${bearer}`
+        }
+      };
+    try {
+        const error = null;
+        const restaurant = await fetch(`${ROOT_URL}/${id}`, options)
+            .then(res => res.json());
+        const restaurantMongo = await Restaurant.findOne({id: id}).populate('reviews');
+        res.render('reviews/all', {title: 'All Reviews', error, restaurantMongo, restaurant});
+    } catch (error) {
+        const restaurantMongo = null;
+        res.render('reviews/all', {title: 'All Reviews', restaurantMongo, error});
+    }
+}
+
+async function update(req, res, next) {
+    const reviewId = req.params.reviewId;
+    const restaurantApiId = req.params.restaurantId;
+    try {
+      // Find the review in the database and update its properties
+      const review = await Review.findById(reviewId);
+      review.rating = req.body.rating;
+      review.content = req.body.content;
+      await review.save();
+      res.redirect(`/restaurants/${restaurantApiId}`);
+    } catch (err) {
+      next(err);
+    }
+}
+
+async function edit(req, res, next) {
+    const restaurantApiId = req.params.restaurantId;
+    const reviewId = req.params.reviewId;
+    const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${bearer}`
+        }
+    };
+    try {
+        const review = await Review.findById(reviewId);
+        const restaurant = await fetch(`${ROOT_URL}/${restaurantApiId}`, options)
+            .then(res => res.json());
+        const error = null;
+        res.render('reviews/edit', {title: 'Edit Review', restaurant, error, review});
+    } catch (error) {
+        const restaurant = null;
+        res.render('reviews/edit', {title: 'Error', restaurant, error});
+    }
+}
 
 async function deleteReview(req, res, next) {
     const reviewId = req.params.reviewId;
@@ -36,7 +97,7 @@ function create(req, res) {
         req.body.userName = req.user.name;
         req.body.userAvatar = req.user.avatar;
         req.body.restaurant = restaurant._id;
-      // create a new review object
+        // create a new review object
         const review = new Review(req.body);
         review.save(async function(err, review) {
             // push the review ObjectId into both the corresponding restaurant and user's
@@ -50,21 +111,6 @@ function create(req, res) {
         });
     });
 }
-    //   console.log(req.restaurant);
-    //   req.body.restaurant = req.restaurant._id;
-    //   req.body.restaurant = restaurant._id;
-    //   console.log(req.body)
-    //   restaurant.reviews.push(req.body);
-    //   console.log(restaurant.reviews, "This is restaurant.reviews");
-    //   restaurant.save(async function(err) {
-    //     let user = await User.findOne({'id': req.params.id});
-    //     user.reviews.push(req.body);
-    //     console.log(user, 'user');
-    //     await user.save()
-    //     res.redirect(`/restaurants/${restaurant.id}`);
-    //   });
-    // });
-// }
 
 async function newReview(req, res, next) {
     const id = req.params.id;

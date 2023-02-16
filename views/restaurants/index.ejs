@@ -8,17 +8,25 @@
         <div class="restaurants-info">
             <h2><a href="/restaurants/<%= r.id %>"><%= r.name %></a></h2>
             <div class="restaurant-rating">Yelp rating: 
-              <% for (let i = 0; i < Math.floor(r.rating); i++) { %>
-              <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
-              <% } %>
-              <% if (r.rating % 1 !== 0) { %>
-              <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
-              <% } %>
+              <div>
+                <% for (let i = 0; i < Math.floor(r.rating); i++) { %>
+                <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                <% } %>
+                <% if (r.rating % 1 !== 0) { %>
+                <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
+                <% } %>
+              </div>
             </div>
-            <p>
-              
-            </p>
-            <p><%= r.rating %></p>
+          <div class="restaurant-info" style="justify-content: flex-start; margin-left: 0;">
+            <div class="restaurant-price" style="background-color: gray;">
+                <%= r.price %>
+            </div>
+            <div class="restaurant-categories">
+                <% r.categories.forEach(function(category) { %>
+                    | <%= category.title %>
+                <% }); %>
+            </div>
+          </div>
         </div>
     </li>
   <% }); %>
