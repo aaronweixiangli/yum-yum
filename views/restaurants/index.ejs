@@ -1,193 +1,167 @@
 <%- include('../partials/header') %>
-  <% if (error) { %>
-    <main>
-      <h1>Sorry, the location or term could not be found</h1>
-      <p>
-        <%= error %>
-      </p>
-    </main>
-
-    <% } else { %>
-
-
-      <main id="restaurants-page">
-        <section id="filter-section">
-          <form id="filter-form" action="/restaurants" method="GET">
-            <div id="filter-first-row">
-              <div>
-                <input type="text" style="display: none;" value="<%= term %>" name="term">
-                <input type="text" style="display: none;" value="<%= location %>" name="location">
-                <input type="number" style="display: none;" value="<%= currentPage %>" name="page">
-                <label>Price:</label>
-                <select name="price">
-                  <option value="" <%=price==='' ? "selected" : "" %>>All</option>
-                  <option value="1" <%=price==='1' ? "selected" : "" %>>$</option>
-                  <option value="2" <%=price==='2' ? "selected" : "" %>>$$</option>
-                  <option value="3" <%=price==='3' ? "selected" : "" %>>$$$</option>
-                  <option value="4" <%=price==='4' ? "selected" : "" %>>$$$$</option>
-                </select>
-              </div>
-              <div class="filter-group">
-                <label>Categories:</label>
-                <input type="text" name="categories" value="<%= categories %>">
-              </div>
-              <div>
-                <label>Open Now:</label>
-                <input type="checkbox" name="open_now" value="true" <%=open_now ? 'checked' : '' %>>
-              </div>
-              <div class="filter-group">
-                <label>Sort By:</label>
-                <select name="sort_by">
-                  <option value="best_match" <%=sort_by==='best_match' ? "selected" : "" %>>Best Match</option>
-                  <option value="rating" <%=sort_by==='rating' ? "selected" : "" %>>Rating</option>
-                  <option value="review_count" <%=sort_by==='review_count' ? "selected" : "" %>>Review Count</option>
-                </select>
-              </div>
-            </div>
-            <div class="attributes-list">
-              <label>
-                <input type="checkbox" name="attributes" value="hot_and_new" <%=attributesArr.includes('hot_and_new')
-                  ? 'checked' : '' %>> Hot and New
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="request_a_quote"
-                  <%=attributesArr.includes('request_a_quote') ? 'checked' : '' %>> Request a Quote
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="reservation" <%=attributesArr.includes('reservation')
-                  ? 'checked' : '' %>> Reservation
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="waitlist_reservation"
-                  <%=attributesArr.includes('waitlist_reservation') ? 'checked' : '' %>> Waitlist Reservation
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="deals" <%=attributesArr.includes('deals') ? 'checked'
-                  : '' %>> Deals
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="gender_neutral_restrooms"
-                  <%=attributesArr.includes('gender_neutral_restrooms') ? 'checked' : '' %>> Gender Neutral Restrooms
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="open_to_all" <%=attributesArr.includes('open_to_all')
-                  ? 'checked' : '' %>> Open to All
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="wheelchair_accessible"
-                  <%=attributesArr.includes('wheelchair_accessible') ? 'checked' : '' %>> Wheelchair Accessible
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="liked_by_vegetarians"
-                  <%=attributesArr.includes('liked_by_vegetarians') ? 'checked' : '' %>> Liked by Vegetarians
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="outdoor_seating"
-                  <%=attributesArr.includes('outdoor_seating') ? 'checked' : '' %>> Outdoor Seating
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="parking_garage"
-                  <%=attributesArr.includes('parking_garage') ? 'checked' : '' %>> Parking Garage
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="parking_lot" <%=attributesArr.includes('parking_lot')
-                  ? 'checked' : '' %>> Parking Lot
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="parking_street"
-                  <%=attributesArr.includes('parking_street') ? 'checked' : '' %>> Parking Street
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="parking_valet"
-                  <%=attributesArr.includes('parking_valet') ? 'checked' : '' %>> Parking Valet
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="parking_validated"
-                  <%=attributesArr.includes('parking_validated') ? 'checked' : '' %>> Parking Validated
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="parking_bike" <%=attributesArr.includes('parking_bike')
-                  ? 'checked' : '' %>> Parking Bike
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="restaurants_delivery"
-                  <%=attributesArr.includes('restaurants_delivery') ? 'checked' : '' %>> Restaurants Delivery
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="restaurants_takeout"
-                  <%=attributesArr.includes('restaurants_takeout') ? 'checked' : '' %>> Restaurants Takeout
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="wifi_free" <%=attributesArr.includes('wifi_free')
-                  ? 'checked' : '' %>> Free Wi-Fi
-              </label>
-              <label>
-                <input type="checkbox" name="attributes" value="wifi_paid" <%=attributesArr.includes('wifi_paid')
-                  ? 'checked' : '' %>> Paid Wi-Fi
-              </label>
-            </div>
-            <div id="filter-submit">
-              <button type="submit">Apply Filters</button>
-            </div>
-          </form>
-        </section>
-        <section id="restaurants-results">
-          <ol class="restaurant-list">
-            <h1>Results</h1>
-            <% pageRestaurants.forEach(function(r) { %>
-              <li class="restaurants">
-                <img class="restaurants-image" src="<%= r.image_url %>" alt="<%= r.name %>">
-                <div class="restaurants-info">
-                  <h2><a href="/restaurants/<%= r.id %>">
-                      <%= r.name %>
-                    </a></h2>
-                  <div class="restaurant-rating">Yelp rating:
-                    <div>
-                      <% for (let i=0; i < Math.floor(r.rating); i++) { %>
-                        <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
-                        <% } %>
-                          <% if (r.rating % 1 !==0) { %>
-                            <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
-                            <% } %>
-                    </div>
-                  </div>
-                  <div class="restaurant-info" style="justify-content: flex-start; margin-left: 0;">
-                    <div class="restaurant-price" style="background-color: gray;">
-                      <%= r.price %>
-                    </div>
-                    <div class="restaurant-categories">
-                      <% r.categories.forEach(function(category) { %>
-                        | <%= category.title %>
-                          <% }); %>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <% }); %>
-          </ol>
-          <ul class="pages">
-            <% if (hasPrevPage) { %>
-              <li>
-                <a
-                  href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage-1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>"><<
-                </a>
-              </li>
+<% if (error) { %>
+<main>
+  <h1>Sorry, the location or term could not be found</h1>
+  <p>
+    <%= error %>
+  </p>
+</main>
+<% } else { %>
+<main id="restaurants-page">
+  <section id="filter-section">
+    <form id="filter-form" action="/restaurants" method="GET">
+      <div id="filter-first-row">
+        <div>
+          <input type="text" style="display: none;" value="<%= term %>" name="term">
+          <input type="text" style="display: none;" value="<%= location %>" name="location">
+          <input type="number" style="display: none;" value="<%= currentPage %>" name="page">
+          <label>Price:</label>
+          <select name="price">
+            <option value="" <%=price==='' ? "selected" : "" %>>All</option>
+            <option value="1" <%=price==='1' ? "selected" : "" %>>$</option>
+            <option value="2" <%=price==='2' ? "selected" : "" %>>$$</option>
+            <option value="3" <%=price==='3' ? "selected" : "" %>>$$$</option>
+            <option value="4" <%=price==='4' ? "selected" : "" %>>$$$$</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Categories:</label>
+          <input type="text" name="categories" value="<%= categories %>">
+        </div>
+        <div>
+          <label>Open Now:</label>
+          <input type="checkbox" name="open_now" value="true" <%=open_now ? 'checked' : '' %>>
+        </div>
+        <div class="filter-group">
+          <label>Sort By:</label>
+          <select name="sort_by">
+            <option value="best_match" <%=sort_by==='best_match' ? "selected" : "" %>>Best Match</option>
+            <option value="rating" <%=sort_by==='rating' ? "selected" : "" %>>Rating</option>
+            <option value="review_count" <%=sort_by==='review_count' ? "selected" : "" %>>Review Count</option>
+          </select>
+        </div>
+      </div>
+      <div class="attributes-list">
+        <label>
+          <input type="checkbox" name="attributes" value="hot_and_new" <%=attributesArr.includes('hot_and_new') ? 'checked' : '' %>> Hot and New
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="request_a_quote" <%=attributesArr.includes('request_a_quote') ? 'checked' : '' %>> Request a Quote
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="reservation" <%=attributesArr.includes('reservation') ? 'checked' : '' %>> Reservation
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="waitlist_reservation" <%=attributesArr.includes('waitlist_reservation') ? 'checked' : '' %>> Waitlist Reservation
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="deals" <%=attributesArr.includes('deals') ? 'checked' : '' %>> Deals
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="gender_neutral_restrooms" <%=attributesArr.includes('gender_neutral_restrooms') ? 'checked' : '' %>> Gender Neutral Restrooms
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="open_to_all" <%=attributesArr.includes('open_to_all') ? 'checked' : '' %>> Open to All
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="wheelchair_accessible" <%=attributesArr.includes('wheelchair_accessible') ? 'checked' : '' %>> Wheelchair Accessible
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="liked_by_vegetarians" <%=attributesArr.includes('liked_by_vegetarians') ? 'checked' : '' %>> Liked by Vegetarians
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="outdoor_seating" <%=attributesArr.includes('outdoor_seating') ? 'checked' : '' %>> Outdoor Seating
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_garage" <%=attributesArr.includes('parking_garage') ? 'checked' : '' %>> Parking Garage
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_lot" <%=attributesArr.includes('parking_lot') ? 'checked' : '' %>> Parking Lot
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_street" <%=attributesArr.includes('parking_street') ? 'checked' : '' %>> Parking Street
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_valet" <%=attributesArr.includes('parking_valet') ? 'checked' : '' %>> Parking Valet
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_validated" <%=attributesArr.includes('parking_validated') ? 'checked' : '' %>> Parking Validated
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="parking_bike" <%=attributesArr.includes('parking_bike') ? 'checked' : '' %>> Parking Bike
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="restaurants_delivery" <%=attributesArr.includes('restaurants_delivery') ? 'checked' : '' %>> Restaurants Delivery
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="restaurants_takeout" <%=attributesArr.includes('restaurants_takeout') ? 'checked' : '' %>> Restaurants Takeout
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="wifi_free" <%=attributesArr.includes('wifi_free') ? 'checked' : '' %>> Free Wi-Fi
+        </label>
+        <label>
+          <input type="checkbox" name="attributes" value="wifi_paid" <%=attributesArr.includes('wifi_paid') ? 'checked' : '' %>> Paid Wi-Fi
+        </label>
+      </div>
+      <div id="filter-submit">
+        <button type="submit">Apply Filters</button>
+      </div>
+    </form>
+  </section>
+  <section id="restaurants-results">
+    <ol class="restaurant-list">
+      <h1>Results</h1>
+      <% pageRestaurants.forEach(function(r) { %>
+      <li class="restaurants">
+        <img class="restaurants-image" src="<%= r.image_url %>" alt="<%= r.name %>">
+        <div class="restaurants-info">
+          <h2><a href="/restaurants/<%= r.id %>">
+              <%= r.name %>
+            </a></h2>
+          <div class="restaurant-rating">Yelp rating:
+            <div>
+              <% for (let i=0; i < Math.floor(r.rating); i++) { %>
+              <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
               <% } %>
-                <% for (let i=1; i <=numOfPages; i++) { %>
-                  <li>
-                    <a href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= i %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>"
-                      class="<%= currentPage === i ? 'active' : '' %>">
-                      <%= i %>
-                    </a>
-                  </li>
-                  <% } %>
-                    <% if (hasNextPage) { %>
-                      <li>
-                        <a href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage+1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>">>></a>
-                      </li>
-                      <% } %>
-          </ul>
-        </section>
-      </main>
+              <% if (r.rating % 1 !==0) { %>
+              <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
+              <% } %>
+            </div>
+          </div>
+          <div class="restaurant-info" style="justify-content: flex-start; margin-left: 0;">
+            <div class="restaurant-price" style="background-color: gray;">
+              <%= r.price %>
+            </div>
+            <div class="restaurant-categories">
+              <% r.categories.forEach(function(category) { %>
+              | <%= category.title %>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </li>
+      <% }); %>
+    </ol>
+    <ul class="pages">
+      <% if (hasPrevPage) { %>
+      <li>
+        <a href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage-1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>"> << </a>
+      </li>
       <% } %>
-        <%- include('../partials/footer') %>
+      <% for (let i=1; i <=numOfPages; i++) { %>
+      <li>
+        <a href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= i %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>" class="<%= currentPage === i ? 'active' : '' %>">
+          <%= i %>
+        </a>
+      </li>
+      <% } %>
+      <% if (hasNextPage) { %>
+      <li>
+        <a href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage+1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>">>></a>
+      </li>
+      <% } %>
+    </ul>
+  </section>
+</main>
+<% } %>
+<%- include('../partials/footer') %>

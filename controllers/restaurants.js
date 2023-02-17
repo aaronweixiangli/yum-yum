@@ -110,16 +110,6 @@ async function index(req, res, next) {
         const hasNextPage = currentPage * restaurantsPerPage < restaurantsData.businesses.length;
         // Check if there is a previous page
         const hasPrevPage = currentPage > 1;
-
-
-        console.log(term, 'term');
-        console.log(location, 'location');
-        console.log(categories, 'categories');
-        console.log(price, 'price');
-        console.log(open_now, 'open now');
-
-        console.log(attributes, "attribues");
-        console.log(sort_by, "sort_by");
         res.render('restaurants/index', {
             title: 'Restaurants', error,
             pageRestaurants, numOfPages,

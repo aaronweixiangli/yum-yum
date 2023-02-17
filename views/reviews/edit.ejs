@@ -1,36 +1,35 @@
 <%- include('../partials/header') %>
 
-    <main id="review-main">
-        <% if (restaurant) { %>
-            <form id="add-review-form" method="POST"
-                action="/restaurants/<%= restaurant.id %>/reviews/<%= review._id %>?_method=PUT">
-                <h1>
-                    <%= restaurant.name %>
-                </h1>
-                <div>
-                    <div id="rating-select">
-                        <label>Rating:</label>
-                        <select name="rating">
-                            <option value="1" <%=review.rating===1 ? "selected" : "" %>>1</option>
-                            <option value="2" <%=review.rating===2 ? "selected" : "" %>>2</option>
-                            <option value="3" <%=review.rating===3 ? "selected" : "" %>>3</option>
-                            <option value="4" <%=review.rating===4 ? "selected" : "" %>>4</option>
-                            <option value="5" <%=review.rating===5 ? "selected" : "" %>>5</option>
-                        </select>
-                    </div><br>
-                    <div>
-                        <textarea id="review-content" name="content"><%= review.content %></textarea>
-                    </div>
-                </div>
-                <input type="submit" value="Update Review" id="submit-review">
-            </form>
-            <% } else { %>
-                <h1>Sorry, the edit review page could not be found</h1>
-                <p>
-                    <%= error %>
-                </p>
-                <% } %>
-    </main>
+<main id="review-main">
+  <% if (restaurant) { %>
+  <form id="add-review-form" method="POST" action="/restaurants/<%= restaurant.id %>/reviews/<%= review._id %>?_method=PUT">
+    <h1>
+      <%= restaurant.name %>
+    </h1>
+    <div>
+      <div id="rating-select">
+        <label>Rating:</label>
+        <select name="rating">
+          <option value="1" <%=review.rating===1 ? "selected" : "" %>>1</option>
+          <option value="2" <%=review.rating===2 ? "selected" : "" %>>2</option>
+          <option value="3" <%=review.rating===3 ? "selected" : "" %>>3</option>
+          <option value="4" <%=review.rating===4 ? "selected" : "" %>>4</option>
+          <option value="5" <%=review.rating===5 ? "selected" : "" %>>5</option>
+        </select>
+      </div><br>
+      <div>
+        <textarea id="review-content" name="content"><%= review.content %></textarea>
+      </div>
+    </div>
+    <input type="submit" value="Update Review" id="submit-review">
+  </form>
+  <% } else { %>
+  <h1>Sorry, the edit review page could not be found</h1>
+  <p>
+    <%= error %>
+  </p>
+  <% } %>
+</main>
 
 
-    <%- include('../partials/footer') %>
+<%- include('../partials/footer') %>

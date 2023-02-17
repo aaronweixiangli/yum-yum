@@ -23,6 +23,4 @@ router.get('/restaurants/:restaurantId/reviews/:reviewId/edit', ensureLoggedIn, 
 // PUT /restaurants/:restaurantId/reviews/:reviewId
 router.put('/restaurants/:restaurantId/reviews/:reviewId', ensureLoggedIn, reviewsCtrl.update);
 
-
-
 module.exports = router;

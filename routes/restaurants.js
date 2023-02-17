@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const restaurantsCtrl = require('../controllers/restaurants');
 
-
 // Mount to path '/restaurants'
 
 // GET /restaurants

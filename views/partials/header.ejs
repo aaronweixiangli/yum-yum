@@ -22,15 +22,15 @@
       <button type="submit">Search</button>
     </form>
     <% if (user) { %>
-      <div class="top-menu"><img src="<%= user.avatar %>" alt="avatar" class="google-avatar">
-        <%= user.name %>
-          <nav class="sub-menu">
-            <a href="/user/favorites" class="sub-menu-content">My Favorite</a>
-            <a href="/user/reviews" class="sub-menu-content">My Reviews</a>
-            <a href="/logout" class="sub-menu-content">LOG OUT</a>
-          </nav>
-      </div>
-      <% } else { %>
-        <a href="/auth/google" class="login top-menu">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        <% } %>
+    <div class="top-menu"><img src="<%= user.avatar %>" alt="avatar" class="google-avatar">
+      <%= user.name %>
+      <nav class="sub-menu">
+        <a href="/user/favorites" class="sub-menu-content">My Favorite</a>
+        <a href="/user/reviews" class="sub-menu-content">My Reviews</a>
+        <a href="/logout" class="sub-menu-content">LOG OUT</a>
+      </nav>
+    </div>
+    <% } else { %>
+    <a href="/auth/google" class="login top-menu">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+    <% } %>
   </nav>

@@ -18,7 +18,6 @@ async function viewReviews(req, res, next) {
             model: 'Restaurant'
         }
     });
-    console.log(user);
     res.render('users/reviews', { title: 'My Reviews', user })
 }
 
