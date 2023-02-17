@@ -169,8 +169,8 @@
             <% if (hasPrevPage) { %>
               <li>
                 <a
-                  href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage-1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>">
-                  <<< /a>
+                  href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage-1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>"><<
+                </a>
               </li>
               <% } %>
                 <% for (let i=1; i <=numOfPages; i++) { %>
@@ -183,8 +183,7 @@
                   <% } %>
                     <% if (hasNextPage) { %>
                       <li>
-                        <a
-                          href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage+1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>">>></a>
+                        <a href="/restaurants/?term=<%= term %>&location=<%= location %>&page=<%= currentPage+1 %>&categories=<%= categories %>&open_now=<%= open_now %>&<%= attributes %>&sort_by=<%= sort_by %>">>></a>
                       </li>
                       <% } %>
           </ul>
