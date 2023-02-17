@@ -18,12 +18,12 @@ body {
   display: grid;
   background-color: ivory;
   grid-template-rows: 80px 1fr;
-  grid-template-areas: 
+  grid-template-areas:
     "nav"
     "main"
 }
 
-body > nav {
+body>nav {
   grid-area: nav;
   background-color: lemonchiffon;
   display: flex;
@@ -38,7 +38,7 @@ body > nav {
   height: 10vmin;
 }
 
-.menu > .top-menu {
+.menu>.top-menu {
   color: black;
 }
 
@@ -53,15 +53,18 @@ body > nav {
   padding: 1vmin;
   border-radius: 0.5vmin;
 }
+
 .google-avatar {
   height: 5vmin;
   margin-right: 0.5vmin;
 }
+
 .logo {
   height: 8vmin;
   margin-right: 0.5vmin;
   padding-bottom: 1vmin;
 }
+
 .top-menu:hover {
   background-color: antiquewhite;
 }
@@ -72,7 +75,7 @@ body > nav {
   margin-top: 20.5vh;
   background-color: ivory;
   min-width: 11vmin;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -91,7 +94,7 @@ body > nav {
   background-color: #ddd;
 }
 
-body > main {
+body>main {
   grid-area: main;
   display: flex;
   flex-direction: column;
@@ -116,7 +119,7 @@ body > main {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0.5vmin 0.5vmin 0.5vmin 0.5vmin rgba(0,0,0,0.2);
+  box-shadow: 0.5vmin 0.5vmin 0.5vmin 0.5vmin rgba(0, 0, 0, 0.2);
 }
 
 .search-bar input {
@@ -136,13 +139,16 @@ body > main {
 .search-bar button[type="submit"] {
   padding: 1vmin 2vmin;
   background-color: #f2f2f2;
-  border-radius: 30%;
+  border-radius: 10%;
   border: none;
   font-size: 2vmin;
   background-color: antiquewhite;
   cursor: pointer;
 }
 
+.search-bar button[type="submit"]:hover {
+  background-color: bisque;
+}
 
 #restaurants-page {
   background-image: none;
@@ -151,30 +157,36 @@ body > main {
   align-items: flex-start;
   margin-top: 1vmin;
 }
+
 #filter-form {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 15fr 1fr;
   width: 95vw;
 }
+
 #filter-submit {
   grid-area: 1 / 2 / span 2 / span 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#filter-submit > button {
+
+#filter-submit>button {
   height: 5vmin;
-  background-color:antiquewhite;
+  background-color: antiquewhite;
 }
-#filter-submit > button:hover {
+
+#filter-submit>button:hover {
   background-color: bisque;
 }
+
 #filter-first-row {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .attributes-list {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
@@ -188,29 +200,34 @@ body > main {
   align-items: center;
   width: 95vw;
 }
+
 #restaurants-results h1 {
   margin-left: 1vmin;
 }
+
 .restaurants-image {
   width: 150px;
   height: 150px;
   margin-right: 20px;
 }
+
 .restaurants-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.restaurant-list li{
+.restaurant-list li {
   padding-top: 2vmin;
   padding-left: 1vmin;
   border-bottom: #ccc solid 0.1vmin;
   padding-bottom: 1.5vmin;
 }
+
 .restaurant-list li:hover {
-  box-shadow: 2px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 2px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
+
 .pages {
   display: flex;
   list-style-type: none;
@@ -218,12 +235,14 @@ body > main {
   padding: 0;
   bottom: 0;
   justify-content: flex-end;
-  margin-right: 5vmin ;
+  margin-right: 5vmin;
 }
+
 .pages li {
   margin: 1vmin 1vmin 5vmin;
   font-size: 2.5vmin;
 }
+
 .pages .active {
   text-decoration: underline;
 }
@@ -233,6 +252,7 @@ body > main {
   display: grid;
   grid-template-rows: 40vmin 5vmin 45vmin 1fr;
 }
+
 .header-content {
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -242,16 +262,19 @@ body > main {
   justify-content: center;
   height: 100%;
 }
+
 .restaurant-name {
   font-size: 6vmin;
   font-weight: bold;
   text-shadow: 1px 1px #333;
 }
+
 .restaurant-info {
   margin: 2vmin;
   display: flex;
   justify-content: center;
 }
+
 .restaurant-rating {
   display: flex;
   align-items: center;
@@ -259,12 +282,16 @@ body > main {
   font-size: 1.5vmin;
   font-weight: bold;
 }
+
 .restaurant-rating img {
   height: 2vmin;
 }
-#yelp-rating-info, #yumyum-rating-info {
+
+#yelp-rating-info,
+#yumyum-rating-info {
   margin: 1vmin 0 0.5vmin 0;
 }
+
 .restaurant-review-count {
   font-size: 1.25vmin;
   color: #ccc;
@@ -273,6 +300,7 @@ body > main {
   justify-content: center;
   align-items: center;
 }
+
 .restaurant-price {
   font-size: 1.5vmin;
   font-weight: bold;
@@ -281,24 +309,32 @@ body > main {
   border-radius: 0.5vmin;
   padding: 0.25vmin 0.5vmin;
 }
+
 .restaurant-categories {
   margin-left: 1vmin;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .restaurant-open {
   color: aquamarine;
 }
+
 .restaurant-today-hours {
   margin-left: 2vmin;
 }
+
 #add-forms {
   height: 5vmin;
   display: flex;
   align-items: center;
 }
-#new-review, #scroll-down, #all-reviews {
+
+#new-review,
+#scroll-down,
+#all-reviews,
+#save-restaurant {
   background-color: red;
   color: white;
   margin-left: 5.5vmin;
@@ -308,16 +344,41 @@ body > main {
   padding: 1vmin 0.8vmin 0 1.2vmin;
   border: none;
 }
-#new-review:hover, #scroll-down:hover, #all-reviews:hover {
+
+#new-review:hover,
+#scroll-down:hover,
+#all-reviews:hover,
+#save-restaurant:hover {
   background-color: brown;
   color: white;
   text-decoration: none;
 }
+
 #scroll-down {
   padding: 0 0.8vmin 0 0.8vmin;
 }
+
 #all-reviews {
   padding: 1vmin 0.8vmin 0 2.8vmin;
+}
+
+#save-restaurant {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5vmin 1.2vmin 0.5vmin 1vmin;
+}
+
+#save-icon {
+  height: 2.5vmin;
+  width: 2vmin;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 50%, 0 100%);
+  background-color: lightgray;
+  margin-right: 1vmin;
+}
+
+#save-restaurant .active {
+  background-color: gold;
 }
 
 .restaurant-main {
@@ -336,13 +397,14 @@ body > main {
   line-height: 3vmin;
 }
 
-.restaurant-hours > table {
+.restaurant-hours>table {
   border-collapse: collapse;
   table-layout: auto;
   width: 60%;
 }
 
-table td, table th {
+table td,
+table th {
   border-bottom: 0.1vmin solid rgb(231, 230, 230);
   text-align: center;
 }
@@ -358,34 +420,41 @@ table td, table th {
 #add-review-form div div {
   display: flex;
 }
-#review-content  {
+
+#review-content {
   height: 30vmin;
   width: 60vmin;
   background-color: rgba(255, 255, 255, 0.4);
   font-size: large;
 }
+
 #submit-review {
   width: 50%;
   height: 3vmin;
   background-color: antiquewhite;
 }
+
 #submit-review:hover {
-  background-color:peachpuff;
+  background-color: peachpuff;
 }
+
 #review-main {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#add-review-form > div {
+
+#add-review-form>div {
   border: 0.1vmin solid lightgray;
   padding: 1vmin;
 }
-#rating-select > label {
+
+#rating-select>label {
   color: brown;
   font-size: 2vmin;
 }
-#rating-select > select {
+
+#rating-select>select {
   width: 8vmin;
   margin-left: 1vmin;
 }
@@ -396,7 +465,8 @@ table td, table th {
   margin-right: 0.5vmin;
 }
 
-#yelp-reviews-div, #yumyum-reviews-div {
+#yelp-reviews-div,
+#yumyum-reviews-div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -404,45 +474,63 @@ table td, table th {
   font-size: 2vmin;
 }
 
-#yelp-reviews-table, #yumyum-reviews-table {
+#yelp-reviews-table,
+#yumyum-reviews-table {
   width: 80vw;
 }
+
 #yumyum-reviews-table {
   margin-bottom: 20vmin;
 }
-#yelp-reviews-table tr, #yumyum-reviews-table tr {
+
+#yelp-reviews-table tr,
+#yumyum-reviews-table tr {
   height: 3vmin;
 }
-#yelp-reviews-table td, #yumyum-reviews-table td {
+
+#yelp-reviews-table td,
+#yumyum-reviews-table td {
   white-space: normal;
   word-wrap: break-word;
   padding-top: 1vmin;
   padding-bottom: 1vmin;
 }
-.review-user > div {
+
+.review-user>div {
   display: flex;
   align-items: center;
 }
-#yelp-reviews-table td:nth-child(1), #yumyum-reviews-table td:nth-child(1) {
+
+#yelp-reviews-table td:nth-child(1),
+#yumyum-reviews-table td:nth-child(1) {
   width: 10%;
 }
-#yelp-reviews-table td:nth-child(2), #yumyum-reviews-table td:nth-child(2) {
+
+#yelp-reviews-table td:nth-child(2),
+#yumyum-reviews-table td:nth-child(2) {
   width: 10%;
 }
-#yelp-reviews-table td:nth-child(3), #yumyum-reviews-table td:nth-child(3) {
+
+#yelp-reviews-table td:nth-child(3),
+#yumyum-reviews-table td:nth-child(3) {
   width: 60%;
   text-align: left;
 }
-#yelp-reviews-table td:nth-child(4), #yumyum-reviews-table td:nth-child(4) {
+
+#yelp-reviews-table td:nth-child(4),
+#yumyum-reviews-table td:nth-child(4) {
   width: 10%;
 }
-#yelp-reviews-table td:nth-child(5), #yumyum-reviews-table td:nth-child(5) {
+
+#yelp-reviews-table td:nth-child(5),
+#yumyum-reviews-table td:nth-child(5) {
   width: 10%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3vmin;
   margin-left: 3vmin;
 }
+
 #edit-review {
   background-color: bisque;
   border: 0.3vmin solid black;
@@ -451,16 +539,22 @@ table td, table th {
   font-size: 1vmin;
   padding: 0.5vmin 0.8vmin 0.5vmin 0.8vmin;
 }
+
 #edit-review:hover {
   background-color: burlywood;
   text-decoration: none;
 }
 
 #delete-review {
-  background-color:bisque;
+  background-color: bisque;
   height: 3vmin;
   width: 3vmin;
 }
+
 #delete-review:hover {
   background-color: burlywood;
+}
+
+#no-reviews-yet {
+  margin-bottom: 30vmin;
 }

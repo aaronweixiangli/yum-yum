@@ -1,0 +1,94 @@
+<%- include('../partials/header') %>
+    <main style="background-color: ivory; background-image: none;">
+        <div id="yumyum-reviews-div">
+            <h1>My Reviews</h1>
+            <% if (user.reviews.length) { %>
+                <table id="yumyum-reviews-table" style="width:95vw">
+                    <thead>
+                        <tr>
+                            <th>Restaurant</th>
+                            <th>Date</th>
+                            <th>Review</th>
+                            <th>Rating</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% user.reviews.forEach(function(r) { %>
+                            <tr>
+                                <td>
+                                    <div class="restaurants" style="width:25vw">
+                                        <img class="restaurants-image" src="<%= r.restaurant.image_url %>"
+                                            alt="<%= r.name %>">
+                                        <div class="restaurants-info">
+                                            <h2><a href="/restaurants/<%= r.restaurant.id %>" style="font-size:x-large">
+                                                    <%= r.restaurant.name %>
+                                                </a></h2>
+                                            <div class="restaurant-rating">Yelp rating:
+                                                <div>
+                                                    <% for (let i=0; i < Math.floor(r.restaurant.rating); i++) { %>
+                                                        <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                                                        <% } %>
+                                                            <% if (r.restaurant.rating % 1 !==0) { %>
+                                                                <img src="https://i.imgur.com/pMtM41j.png"
+                                                                    alt="half star">
+                                                                <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="restaurant-info"
+                                                style="justify-content: flex-start; margin-left: 0;">
+                                                <div class="restaurant-price" style="background-color: gray;">
+                                                    <%= r.restaurant.price %>
+                                                </div>
+                                                <div class="restaurant-categories">
+                                                    <% r.restaurant.categories.forEach(function(category) { %>
+                                                        | <%= category.title %>
+                                                            <% }); %>
+                                                </div>
+                                            </div>
+                                            <div class="restaurant-info"
+                                                style="justify-content: flex-start; margin-left: 0; align-items: flex-start; margin-top: 0; font-size: small;">
+                                                <%= r.restaurant.city %>,<%= r.restaurant.state %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <%= r.createdAt.toLocaleDateString() %>
+                                </td>
+                                <td style="width:40%; text-align: center;">
+                                    <%= r.content %>
+                                </td>
+                                <td>
+                                    <div class="restaurant-rating">
+                                        <% for (let i=0; i < Math.floor(r.rating); i++) { %>
+                                            <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                                            <% } %>
+                                                <% if (r.rating % 1 !==0) { %>
+                                                    <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
+                                                    <% } %>
+                                    </div>
+                                </td>
+                                <td
+                                    style="display: flex; justify-content: center; align-items: center; height: 23vmin; padding-left: 10vmin;">
+                                    <% if (user?._id.equals(r.user)) { %>
+                                        <a href="/restaurants/<%= r.restaurant.id %>/reviews/<%= r._id %>/edit"
+                                            id="edit-review">Edit</a>
+                                        <form
+                                            action="/restaurants/<%= r.restaurant.id %>/reviews/<%= r._id %>?_method=DELETE"
+                                            method="POST">
+                                            <button type="submit" id="delete-review">X</button>
+                                        </form>
+                                        <% } %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <% } else { %>
+                    <h3>No Reviews Yet</h3>
+                    <% } %>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>

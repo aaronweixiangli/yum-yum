@@ -10,7 +10,7 @@ passport.use(new GoogleStrategy(
         callbackURL: process.env.GOOGLE_CALLBACK
     },
     // Verify callback function
-    async function(accessToken, refreshToken, profile, cb) {
+    async function (accessToken, refreshToken, profile, cb) {
         // A user has logged in with OAuth
         try {
             let user = await User.findOne({ googleId: profile.id });
@@ -25,15 +25,15 @@ passport.use(new GoogleStrategy(
             });
             return cb(null, user);
         } catch (err) {
-            return cb(err);            
+            return cb(err);
         }
     }
 ));
 
-passport.serializeUser(function(user, cb) {
+passport.serializeUser(function (user, cb) {
     cb(null, user._id);
 });
 
-passport.deserializeUser(async function(userId, cb) {
+passport.deserializeUser(async function (userId, cb) {
     cb(null, await User.findById(userId));
 });

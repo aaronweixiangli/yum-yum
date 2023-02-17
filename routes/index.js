@@ -8,7 +8,7 @@ const clientId = process.env.YELP_CLIENT_ID;
 const ROOT_URL = 'https://api.yelp.com/v3';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('home', { title: 'YumYum' });
 });
 
@@ -34,8 +34,8 @@ router.get('/oauth2callback', function (req, res, next) {
   )(req, res, next);  // Call the middleware returned by passport
 });
 
-router.get('/logout', function(req, res) {
-  req.logout(function() {
+router.get('/logout', function (req, res) {
+  req.logout(function () {
     res.redirect('/');
   });
 })

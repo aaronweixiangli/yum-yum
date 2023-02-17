@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <style>
         body {
             height: auto;
         }
-         .restaurant-header {
+
+        .restaurant-header {
             background-image: url("<%= restaurant.image_url %>");
             background-size: cover;
             background-position: center;
             height: 40vmin;
-         }
-         body > main {
+        }
+
+        body>main {
             background-image: none;
-         }
+        }
     </style>
 </head>
+
 <body>
     <nav class="menu">
         <a href="/" class="top-menu"><img src="https://i.imgur.com/Yzv8KHw.png" alt="logo" class="logo"></a>
@@ -30,15 +36,18 @@
             <button type="submit">Search</button>
         </form>
         <% if (user) { %>
-            <div class="top-menu"><img src="<%= user.avatar %>" alt="avatar" class="google-avatar"><%= user.name %>
-              <nav class="sub-menu">
-                <a href="" class="sub-menu-content">Favorite</a>
-                <a href="/logout" class="sub-menu-content">LOG OUT</a>
-              </nav>
+            <div class="top-menu"><img src="<%= user.avatar %>" alt="avatar" class="google-avatar">
+                <%= user.name %>
+                    <nav class="sub-menu">
+                        <a href="/user/favorites" class="sub-menu-content">My Favorite</a>
+                        <a href="/user/reviews" class="sub-menu-content">My Reviews</a>
+                        <a href="/logout" class="sub-menu-content">LOG OUT</a>
+                    </nav>
             </div>
-          <% } else { %>
-            <a href="/auth/google" class="login top-menu">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-          <% } %>
+            <% } else { %>
+                <a href="/auth/google" class="login top-menu">LOG IN&nbsp;<img
+                        src="https://i.imgur.com/FHjYyi0.png"></a>
+                <% } %>
     </nav>
     <main class="restaurant-content">
         <% if (restaurant) { %>
@@ -49,70 +58,76 @@
                     </div>
                     <div class="restaurant-info" id="yelp-rating-info">
                         <div class="restaurant-rating">
-                            <% for (let i = 0; i < Math.floor(restaurant.rating); i++) { %>
-                            <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
-                            <% } %>
-                            <% if (restaurant.rating % 1 !== 0) { %>
-                            <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
-                            <% } %>
+                            <% for (let i=0; i < Math.floor(restaurant.rating); i++) { %>
+                                <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                                <% } %>
+                                    <% if (restaurant.rating % 1 !==0) { %>
+                                        <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
+                                        <% } %>
                         </div>
                         <div class="restaurant-review-count">
                             (<%= restaurant.review_count %> Yelp reviews)
                         </div>
                     </div>
-                    <% let total = 0; %>
-                    <% restaurantMongo.reviews.forEach(function(r) { %>
-                        <% total += r.rating %>
-                        <% }); %>
-                    <% let yumyumRating = (total / restaurantMongo.reviews.length).toFixed(1) %>
-                    <% if (total !== 0) { %>
-                    <div class="restaurant-info" id="yumyum-rating-info">
-                        <div class="restaurant-rating">
-                            <% for (let i = 0; i < Math.floor(yumyumRating); i++) { %>
-                            <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
-                            <% } %>
-                            <% if (yumyumRating % 1 !== 0) { %>
-                            <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
-                            <% } %>
-                        </div>
-                        <div class="restaurant-review-count">
-                            (<%= restaurantMongo.reviews.length %> Yum Yum reviews)
-                        </div>
-                    </div>
-                    <% } else { %>
-                        <div class="restaurant-info" id="yumyum-rating-info" style="color:lightgray">
-                            No Yum Yum reviews yet
-                        </div>
-                    <% } %>
-                    <div class="restaurant-info">
-                        <div class="restaurant-price">
-                            <%= restaurant.price %>
-                        </div>
-                        <div class="restaurant-categories">
-                            <% restaurant.categories.forEach(function(category) { %>
-                                | <%= category.title %>
-                            <% }); %>
-                        </div>
-                    </div>
-                    <div class="restaurant-info">
-                        <div class="restaurant-open">
-                            <% if (restaurant.hours[0].is_open_now) { %>
-                                Open now
-                            <% } else { %>
-                                Closed now 
-                            <% }; %>
-                        </div>
-                        <div class="restaurant-today-hours">
-                            <% if (restaurant.hours[0].is_open_now) { %>
-                                <% for (let i = 0; i < restaurant.hours[0].open.length; i++) { %>
-                                    <% if (restaurant.hours[0].open[i].day === new Date().getDay()) { %>
-                                        <%= formatTime(restaurant.hours[0].open[i].start) %> to 
-                                        <%= formatTime(restaurant.hours[0].open[i].end) %>
-                                    <% } %>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
+                    <% let total=0; %>
+                        <% restaurantMongo.reviews.forEach(function(r) { %>
+                            <% total +=r.rating %>
+                                <% }); %>
+                                    <% let yumyumRating=(total / restaurantMongo.reviews.length).toFixed(1) %>
+                                        <% if (total !==0) { %>
+                                            <div class="restaurant-info" id="yumyum-rating-info">
+                                                <div class="restaurant-rating">
+                                                    <% for (let i=0; i < Math.floor(yumyumRating); i++) { %>
+                                                        <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                                                        <% } %>
+                                                            <% if (yumyumRating % 1 !==0) { %>
+                                                                <img src="https://i.imgur.com/pMtM41j.png"
+                                                                    alt="half star">
+                                                                <% } %>
+                                                </div>
+                                                <div class="restaurant-review-count">
+                                                    (<%= restaurantMongo.reviews.length %> Yum Yum reviews)
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                                <div class="restaurant-info" id="yumyum-rating-info"
+                                                    style="color:lightgray">
+                                                    No Yum Yum reviews yet
+                                                </div>
+                                                <% } %>
+                                                    <div class="restaurant-info">
+                                                        <div class="restaurant-price">
+                                                            <%= restaurant.price %>
+                                                        </div>
+                                                        <div class="restaurant-categories">
+                                                            <% restaurant.categories.forEach(function(category) { %>
+                                                                | <%= category.title %>
+                                                                    <% }); %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="restaurant-info">
+                                                        <div class="restaurant-open">
+                                                            <% if (restaurant.hours[0].is_open_now) { %>
+                                                                Open now
+                                                                <% } else { %>
+                                                                    Closed now
+                                                                    <% }; %>
+                                                        </div>
+                                                        <div class="restaurant-today-hours">
+                                                            <% if (restaurant.hours[0].is_open_now) { %>
+                                                                <% for (let i=0; i < restaurant.hours[0].open.length;
+                                                                    i++) { %>
+                                                                    <% if (restaurant.hours[0].open[i].day===new
+                                                                        Date().getDay()) { %>
+                                                                        <%= formatTime(restaurant.hours[0].open[i].start)
+                                                                            %> to
+                                                                            <%= formatTime(restaurant.hours[0].open[i].end)
+                                                                                %>
+                                                                                <% } %>
+                                                                                    <% } %>
+                                                                                        <% } %>
+                                                        </div>
+                                                    </div>
                 </div>
             </div>
             <section id="add-forms">
@@ -121,65 +136,82 @@
                 <script>
                     function scrollDown() {
                         window.scrollTo({
-                            top: document.body.scrollHeight,
+                            top: window.scrollY + 820,
                             behavior: 'smooth'
                         });
                     }
                 </script>
                 <a href="/restaurants/<%= restaurant.id %>/reviews/all" id="all-reviews">All reviews</a>
+                <a href="/restaurants/<%= restaurant.id %>/favorites" id="save-restaurant">
+                    <div id="save-icon"
+                        class="<%= (user && user.favorites.includes(restaurantMongo._id)) ? 'active' : ''%>"></div>Save
+                </a>
             </section>
             <section class="restaurant-main">
                 <div class="restaurant-hours">
                     <table>
                         <thead>
                             <tr>
-                              <th>Day</th>
-                              <th>Hours</th>
+                                <th>Day</th>
+                                <th>Hours</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <% let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %>
-                            <% let openDays = [] %>
-                            <% let dayIndexMap = {} %>
-                            <% restaurant.hours[0].open.forEach(function(open) { %>
-                                <% if (openDays.includes(open.day)) { %>
-                                    <% dayIndexMap[open.day].push(open) %>
-                                <% } else { %>
-                                    <% openDays.push(open.day) %>
-                                    <% dayIndexMap[open.day] = [open] %>
-                                <% } %>
-                            <% }) %>
-                            <% for (let i = 0; i < days.length; i++) { %>
-                                <tr>
-                                    <td><%= days[i] %>: </td>
-                                    <% if (openDays.includes(i)) { %>
-                                        <% let dayOpen = dayIndexMap[i] %>
-                                    <td>
-                                        <% for (let j = 0; j < dayOpen.length; j++) { %>
-                                        <%= formatTime(dayOpen[j].start) %> to 
-                                        <%= formatTime(dayOpen[j].end) %>
-                                        <% if (j < dayOpen.length - 1) { %>
-                                            <br>
-                                        <% } %>
-                                        <% } %>
-                                    <% } else { %>
-                                        <td>Closed</td>
-                                    <% } %>
-                                    </td>
-                                </tr>
-                            <% } %>
+                            <% let days=['Monday', 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday'
+                                , 'Sunday' ] %>
+                                <% let openDays=[] %>
+                                    <% let dayIndexMap={} %>
+                                        <% restaurant.hours[0].open.forEach(function(open) { %>
+                                            <% if (openDays.includes(open.day)) { %>
+                                                <% dayIndexMap[open.day].push(open) %>
+                                                    <% } else { %>
+                                                        <% openDays.push(open.day) %>
+                                                            <% dayIndexMap[open.day]=[open] %>
+                                                                <% } %>
+                                                                    <% }) %>
+                                                                        <% for (let i=0; i < days.length; i++) { %>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <%= days[i] %>:
+                                                                                </td>
+                                                                                <% if (openDays.includes(i)) { %>
+                                                                                    <% let dayOpen=dayIndexMap[i] %>
+                                                                                        <td>
+                                                                                            <% for (let j=0; j <
+                                                                                                dayOpen.length; j++) {
+                                                                                                %>
+                                                                                                <%= formatTime(dayOpen[j].start)
+                                                                                                    %> to
+                                                                                                    <%= formatTime(dayOpen[j].end)
+                                                                                                        %>
+                                                                                                        <% if (j <
+                                                                                                            dayOpen.length
+                                                                                                            - 1) { %>
+                                                                                                            <br>
+                                                                                                            <% } %>
+                                                                                                                <% } %>
+                                                                                                                    <% } else
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                        <td>Closed</td>
+                                                                                        <% } %>
+                                                                                            </td>
+                                                                            </tr>
+                                                                            <% } %>
                         </tbody>
                     </table>
                 </div>
                 <div class="restaurant-location">
                     <table>
                         <tbody>
-                            <tr><th>Location: </th></tr>
+                            <tr>
+                                <th>Location: </th>
+                            </tr>
                             <tr>
                                 <td>
-                                    <% for (let i = 0; i < restaurant.location.display_address.length; i++) { %>
+                                    <% for (let i=0; i < restaurant.location.display_address.length; i++) { %>
                                         <%= restaurant.location.display_address[i] %><br>
-                                    <% } %>
+                                            <% } %>
                                 </td>
                             </tr>
                         </tbody>
@@ -187,109 +219,155 @@
                     <br>
                     <table>
                         <tbody>
-                            <tr><th>Phone Number:</th></tr>
-                            <tr><td><%= restaurant.display_phone %></td></tr>
+                            <tr>
+                                <th>Phone Number:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <%= restaurant.display_phone %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Ordering Options:</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <% restaurant.transactions.forEach(function(t) { %>
+                                        <%= t.charAt(0).toUpperCase() + t.slice(1) %><br>
+                                            <% }) %>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div>
-                    <p>Google Map</p>
+
+                <div id="google-map">
+                    <iframe width="500" height="350" style="border:0" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=<%= GOOGLE_MAP_API_KEY %>&q=<%= restaurant.location.display_address %><br>
+                    ">
+                    </iframe>
                 </div>
             </section>
-        <div id="yelp-reviews-div">
-            <h1>Yelp Top Reviews</h1>
-            <% if (yelpReviews.length) { %>
-                <table id="yelp-reviews-table">
-                  <thead>
-                    <tr>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Review</th>
-                      <th>Rating</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% yelpReviews.forEach(function(r) { %>
-                      <tr>
-                        <td class="review-user"><div><img src="<%= r.user.image_url %>" alt="avatar" referrerpolicy="no-referrer" class="review-avatar"> <%= r.user.name %></div> </td>
-                        <td>
-                            <% const date = new Date(r.time_created); %>
-                            <%= date.toLocaleDateString() %>
-                        </td>
-                        <td><%= r.text %></td>
-                        <td>
-                            <div class="restaurant-rating">
-                                <% for (let i = 0; i < Math.floor(r.rating); i++) { %>
-                                <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
-                                <% } %>
-                                <% if (r.rating % 1 !== 0) { %>
-                                <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
-                                <% } %>
-                            </div>
-                        </td>
-                        <td></td>
-                      </tr>
-                    <% }); %>
-                  </tbody>
-                </table>
-              <% } else { %>
-                <h5>No Reviews Yet</h5>
-              <% } %>
-        </div>
+            <div id="yelp-reviews-div">
+                <h1>Yelp Top Reviews</h1>
+                <% if (yelpReviews.length) { %>
+                    <table id="yelp-reviews-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Review</th>
+                                <th>Rating</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% yelpReviews.forEach(function(r) { %>
+                                <tr>
+                                    <td class="review-user">
+                                        <div><img src="<%= r.user.image_url %>" alt="avatar"
+                                                referrerpolicy="no-referrer" class="review-avatar">
+                                            <%= r.user.name %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <% const date=new Date(r.time_created); %>
+                                            <%= date.toLocaleDateString() %>
+                                    </td>
+                                    <td>
+                                        <%= r.text %>
+                                    </td>
+                                    <td>
+                                        <div class="restaurant-rating">
+                                            <% for (let i=0; i < Math.floor(r.rating); i++) { %>
+                                                <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                                                <% } %>
+                                                    <% if (r.rating % 1 !==0) { %>
+                                                        <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
+                                                        <% } %>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <h5>No Reviews Yet</h5>
+                        <% } %>
+            </div>
 
-        <div id="yumyum-reviews-div">
-            <h1>Yum Yum Reviews</h1>
-            <% if (restaurantMongo.reviews.length) { %>
-                <table id="yumyum-reviews-table">
-                  <thead>
-                    <tr>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Review</th>
-                      <th>Rating</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% restaurantMongo.reviews.forEach(function(r) { %>
-                      <tr>
-                        <td class="review-user"><div><img src="<%= r.userAvatar %>" alt="avatar" referrerpolicy="no-referrer" class="review-avatar"> <%= r.userName %></div> </td>
-                        <td><%= r.createdAt.toLocaleDateString() %></td>
-                        <td><%= r.content %></td>
-                        <td>
-                            <div class="restaurant-rating">
-                                <% for (let i = 0; i < Math.floor(r.rating); i++) { %>
-                                <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
-                                <% } %>
-                                <% if (r.rating % 1 !== 0) { %>
-                                <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
-                                <% } %>
-                            </div>
-                        </td>
-                        <td>
-                          <% if (user?._id.equals(r.user)) { %>
-                            <a href="/restaurants/<%= restaurant.id %>/reviews/<%= r._id %>/edit" id="edit-review">Edit</a>
-                            <form action="/restaurants/<%= restaurant.id %>/reviews/<%= r._id %>?_method=DELETE" method="POST">
-                              <button type="submit" id="delete-review">X</button>
-                            </form>
-                          <% } %>
-                        </td>
-                      </tr>
-                    <% }); %>
-                  </tbody>
-                </table>
-              <% } else { %>
-                <h3>No Reviews Yet</h3>
-              <% } %>
-        </div>
+            <div id="yumyum-reviews-div">
+                <h1>Yum Yum Reviews</h1>
+                <% if (restaurantMongo.reviews.length) { %>
+                    <table id="yumyum-reviews-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Review</th>
+                                <th>Rating</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% restaurantMongo.reviews.forEach(function(r) { %>
+                                <tr>
+                                    <td class="review-user">
+                                        <div><img src="<%= r.userAvatar %>" alt="avatar" referrerpolicy="no-referrer"
+                                                class="review-avatar">
+                                            <%= r.userName %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <%= r.createdAt.toLocaleDateString() %>
+                                    </td>
+                                    <td>
+                                        <%= r.content %>
+                                    </td>
+                                    <td>
+                                        <div class="restaurant-rating">
+                                            <% for (let i=0; i < Math.floor(r.rating); i++) { %>
+                                                <img src="https://i.imgur.com/Sgsr2tn.png" alt="full star">
+                                                <% } %>
+                                                    <% if (r.rating % 1 !==0) { %>
+                                                        <img src="https://i.imgur.com/pMtM41j.png" alt="half star">
+                                                        <% } %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <% if (user?._id.equals(r.user)) { %>
+                                            <a href="/restaurants/<%= restaurant.id %>/reviews/<%= r._id %>/edit"
+                                                id="edit-review">Edit</a>
+                                            <form
+                                                action="/restaurants/<%= restaurant.id %>/reviews/<%= r._id %>?_method=DELETE"
+                                                method="POST">
+                                                <button type="submit" id="delete-review">X</button>
+                                            </form>
+                                            <% } %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% } else { %>
+                        <h3 id="no-reviews-yet">No Reviews Yet</h3>
+                        <% } %>
+            </div>
 
-        <% } else { %>
-            <h1>Sorry, the restaurant could not be found</h1>
-            <p><%= error %></p>
-        <% } %>
+            <% } else { %>
+                <h1>Sorry, the restaurant could not be found</h1>
+                <p>
+                    <%= error %>
+                </p>
+                <% } %>
     </main>
 
 
 
-<%- include('../partials/footer') %>
+    <%- include('../partials/footer') %>
