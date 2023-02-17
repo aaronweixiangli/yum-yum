@@ -17,7 +17,7 @@
                         <% user.reviews.forEach(function(r) { %>
                             <tr>
                                 <td>
-                                    <div class="restaurants" style="width:25vw">
+                                    <div class="restaurants" style="width:28vw">
                                         <img class="restaurants-image" src="<%= r.restaurant.image_url %>"
                                             alt="<%= r.name %>">
                                         <div class="restaurants-info">
@@ -40,7 +40,7 @@
                                                 <div class="restaurant-price" style="background-color: gray;">
                                                     <%= r.restaurant.price %>
                                                 </div>
-                                                <div class="restaurant-categories">
+                                                <div class="restaurant-categories" style="font-size:medium;">
                                                     <% r.restaurant.categories.forEach(function(category) { %>
                                                         | <%= category.title %>
                                                             <% }); %>
